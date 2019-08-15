@@ -1,0 +1,42 @@
+1 yes inv in {15-17,0-2} 2 3
+2 yes node 4 5
+4 yes size in {0-4,10-14,5-9,50-54,45-49,15-19,35-39,20-24,40-44,30-34} 8 no
+8 yes degree in {1,2} 16 no
+16 yes Age in {60-69,40-49,20-29,30-39,70-79} yes 29
+29 no mono in {lt40,ge40} no yes
+5 no size in {30-34} 10 11
+10 yes degree in {2} 18 19
+18 yes Age in {20-29,30-39,70-79} no 31
+31 no mono in {lt40,ge40} no yes
+19 no pos_det in {left_up} 32 33
+32 yes Age in {40-49,20-29,30-39,70-79} no 51
+51 no mono in {lt40,ge40} no yes
+33 no Age in {40-49,20-29,30-39,70-79} no no
+11 no mono in {lt40,ge40} 20 21
+20 yes Age in {60-69,40-49,20-29,30-39,70-79} 34 no
+34 yes pos_det in {right_up,right_low,?,left_up} 54 no
+54 yes degree in {1,2} no no
+21 no degree in {1,2} 36 37
+36 yes pos_det in {central,right_up,right_low,?,left_up} 56 57
+56 yes Age in {20-29,30-39,70-79} no no
+57 no Age in {60-69,40-49,20-29,30-39,70-79} no no
+37 no pos_det in {right_up,right_low,?,left_up} yes 59
+59 no Age in {20-29,30-39,70-79} no no
+3 no size in {35-39,20-24,40-44,30-34} 6 7
+6 yes node 12 13
+12 yes Age in {20-29,30-39,70-79} no 23
+23 no mono in {lt40,ge40} 38 39
+38 yes pos_det in {?,left_up} no 61
+61 no degree in {1,2} no no
+39 no degree in {1,2} 62 no
+62 yes pos_det in {central,right_up,right_low,?,left_up} yes yes
+13 no Age in {20-29,30-39,70-79} 24 25
+24 yes pos_det in {right_up,right_low,?,left_up} yes no
+25 no mono in {lt40,ge40} 42 43
+42 yes degree in {1,2} yes no
+43 no pos_det in {central,right_up,right_low,?,left_up} no yes
+7 no pos_det in {central,right_up,right_low,?,left_up} 14 yes
+14 yes Age in {60-69,40-49,20-29,30-39,70-79} 26 no
+26 yes node 44 yes
+44 yes degree in {1,2} yes 69
+69 no mono in {lt40,ge40} no no

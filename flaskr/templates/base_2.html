@@ -1,0 +1,122 @@
+{% include 'Header.html' %}
+ <div class="content-wrapper">
+     <section class="content-header" style="text-align: center">
+        <h1>TREE SLIQ</h1>
+
+     </section>
+     <section class="content" style="text-align: center">
+         TREE ASLI : {{ tree }}
+     <br>
+    JSON TREE :      [
+{#            ROOT#}
+         {'id': 1,'parentid':0,"name":"{{ tree[1][1] }}" },
+
+         {% for i in tree %}
+             {% if ( tree[i][1]  not in "e" and tree[i][1] not in "o" ) %}
+                 {% for j in tree  %}
+{#                    MENCARI ANAK     #}
+                    {% if tree[i][3] == j or tree[i][2] == j%}
+                        {% if tree[j][1]  not in "e" and tree[j][1] not in "o"  %}
+                            {'id':{{ j }},'parentid':{{ i }},"name":"{{ tree[j][1] }}" },
+                        {% else %}
+                            {% if tree[j][1]  in "e" %}
+                               {'id':{{ j }},'parentid':{{ i }},"name": "yes"  },
+                            {% else %}
+                               {'id':{{ j }},'parentid':{{ i }},"name": "no"  },
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                 {% endfor %}
+             {% endif %}
+         {% endfor %}
+            ]
+
+         <div id="jsChart"></div>
+ </section>
+ </div>
+
+<script>
+     var arr =
+         {#[#}
+        {#{'id':1 ,'parentid' : 0,"name": "Top Level"},#}
+        {#{'id':4 ,'parentid' : 2,"name": ""},#}
+        {#{'id':3 ,'parentid' : 1,"name": "C"},#}
+        {#{'id':5 ,'parentid' : 0,"name": "A"},#}
+        {#{'id':5 ,'parentid' : 0,"name": "B"},#}
+        {#{'id':2 ,'parentid' : 1},#}
+        {#{'id':9 ,'parentid' : 4},#}
+        {#{'id':-1 ,'parentid' : 1}#}
+      {#];#}
+    [
+{#            ROOT#}
+         {'id': 1,'parentid':0,"name":"{{ tree[1][1] }}" },
+         {% for i in tree %}
+             {% if ( tree[i][1]  not in "e" and tree[i][1] not in "o" ) %}
+{#             MENCARI IBU#}
+{#             NAMA IBU#}
+{#             {{ tree[i][1] }}#}
+{#             ANAK PERTAMA#}
+{#             {{ tree[i][2] }}#}
+{#             ANAK KEDUA#}
+{#             {{ tree[i][3] }}#}
+                 {% for j in tree  %}
+{#                    MENCARI ANAK     #}
+                    {% if tree[i][3] == j or tree[i][2] == j%}
+                        {% if tree[j][1]  not in "e" and tree[j][1] not in "o"  %}
+                            {'id':{{ j }},'parentid':{{ i }},"name":"{{ tree[j][1] }}" },
+                        {% else %}
+                            {% if tree[j][1]  in "e" %}
+                               {'id':{{ j }},'parentid':{{ i }},"name": "yes"  },
+                            {% else %}
+                               {'id':{{ j }},'parentid':{{ i }},"name": "no"  },
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                 {% endfor %}
+             {% endif %}
+         {% endfor %}
+            ];
+
+var treeData = unflatten(arr);
+
+
+
+
+//Merubah array flat menjadi Tree
+function unflatten(arr) {
+    {#id to Parent#}
+    {#Child to Id#}
+      var tree = [],
+          mappedArr = {},
+          arrElem,
+          mappedElem;
+
+      // Pertama-tama, buat peta node array ke objek -> buat tabel hash.
+      for(var i = 0, len = arr.length; i < len; i++) {
+        arrElem = arr[i];
+        mappedArr[arrElem.id] = arrElem;
+        mappedArr[arrElem.id]['children'] = [];
+      }
+
+
+      for (var id in mappedArr) {
+        if (mappedArr.hasOwnProperty(id)) {
+
+          mappedElem = mappedArr[id];
+          // Jika elemen tersebut tidak berada pada level root, tambahkan elemen tersebut ke susunan induknya dari anak-anak.
+          if (mappedElem.parentid) {
+            mappedArr[mappedElem['parentid']]['children'].push(mappedElem);
+          }
+          // Jika elemen berada di level root, tambahkan ke array elemen level pertama.
+          else {
+            tree.push(mappedElem);
+          }
+        }
+      }
+      return tree;
+    }
+
+
+</script>
+
+{% include 'Foother.html' %}
